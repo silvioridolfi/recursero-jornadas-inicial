@@ -9,8 +9,8 @@ export function SiteFooter() {
           </p>
         </div>
         <img
-          src="/logo-pba.png"
-          alt="Gobierno de la Provincia de Buenos Aires"
+          src="/images/logo-dte-footer.png"
+          alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"
           className="h-[26px] w-auto object-contain"
         />
       </div>

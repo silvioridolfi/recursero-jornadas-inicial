@@ -9,6 +9,9 @@
   --color-magenta: var(--magenta);
   --color-azul: var(--azul);
   --color-cian: var(--cian);
+  --color-violeta: var(--violeta);
+  --color-rosa: var(--rosa);
+  --color-celeste: var(--celeste);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -51,9 +54,13 @@
 
 :root {
   color-scheme: light;
-  --magenta: #e81f76;
-  --azul: #417099;
+  /* Paleta DTE 2026 (extraída del banner institucional) */
+  --magenta: #d31c6b;
+  --azul: #0b3b63;
   --cian: #00aec3;
+  --violeta: #6f3976;
+  --rosa: #d476a9;
+  --celeste: #90d6e6;
   --background: #f6f7f9;
   --foreground: #3a3a3a;
   --card: #ffffff;
