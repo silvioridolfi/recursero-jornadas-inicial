@@ -1,4 +1,5 @@
 import type { Resource } from '@/lib/resources'
+import { ExternalLinkIcon } from '@/components/resource-icons'
 
 const ACCENT_STYLES: Record<
   Resource['accent'],
@@ -37,13 +38,15 @@ export function ResourceCard({ tag, title, href, accent, icon: Icon }: Resource)
         <Icon />
       </span>
       <span className="flex flex-1 flex-col gap-0.5">
-        <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+        <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           {tag}
+          <ExternalLinkIcon className="text-muted-foreground/70" />
         </span>
         <span className="text-base font-bold leading-snug text-pretty text-foreground">
           {title}
         </span>
       </span>
+      <span className="sr-only"> (se abre en una pestaña nueva)</span>
       <span
         aria-hidden="true"
         className="shrink-0 text-lg text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-foreground"

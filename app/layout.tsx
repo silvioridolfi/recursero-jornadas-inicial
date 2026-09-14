@@ -9,11 +9,29 @@ const encodeSans = Encode_Sans({
   variable: '--font-encode-sans',
 })
 
+const siteUrl = 'https://recursero-jornadas-inicial.vercel.app'
+const title = 'Recursero | Jornadas de Pensamiento Computacional, Programación y Robótica'
+const description =
+  'Recursero de las Jornadas de Pensamiento Computacional, Programación y Robótica en Nivel Inicial. Dirección de Tecnología Educativa (DTE), Región 1, Dirección General de Cultura y Educación, Provincia de Buenos Aires.'
+
 export const metadata: Metadata = {
-  title: 'Recursero | Jornadas de Pensamiento Computacional, Programación y Robótica',
-  description:
-    'Recursero de las Jornadas de Pensamiento Computacional, Programación y Robótica en Nivel Inicial. Dirección de Tecnología Educativa (DTE), Región 1, Dirección General de Cultura y Educación, Provincia de Buenos Aires.',
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   generator: 'v0.app',
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: 'Recursero DTE | Jornadas Nivel Inicial',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
   icons: {
     icon: [
       {

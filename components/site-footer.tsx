@@ -1,3 +1,10 @@
+import { lastVerifiedDate } from '@/lib/resources'
+
+const formattedVerifiedDate = new Date(`${lastVerifiedDate}T00:00:00`).toLocaleDateString(
+  'es-AR',
+  { day: 'numeric', month: 'long', year: 'numeric' },
+)
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-secondary">
@@ -6,6 +13,9 @@ export function SiteFooter() {
           <p className="text-sm font-bold text-foreground">Dirección de Tecnología Educativa</p>
           <p className="mt-0.5 text-xs text-muted-foreground">
             Región 1 · Dirección General de Cultura y Educación
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            Enlaces verificados el {formattedVerifiedDate}
           </p>
         </div>
         <img
