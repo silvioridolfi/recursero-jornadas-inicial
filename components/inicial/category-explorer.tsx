@@ -26,7 +26,7 @@ const ORIGENES: Origen[] = [
 ]
 
 const selectClass =
-  'rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul'
+  'min-h-[44px] rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul'
 
 export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
   const [query, setQuery] = useState('')
@@ -67,7 +67,8 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
           className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
         />
 
-        <div className="flex flex-wrap gap-2">
+        <fieldset className="flex flex-wrap gap-2">
+          <legend className="sr-only">Filtros de búsqueda</legend>
           <select
             aria-label="Filtrar por sala"
             value={sala}
@@ -134,12 +135,12 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
                 setCosto('')
                 setOrigen('')
               }}
-              className="rounded-lg px-3 py-2 text-sm font-semibold text-azul hover:underline"
+              className="min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold text-azul hover:underline"
             >
               Limpiar filtros
             </button>
           )}
-        </div>
+        </fieldset>
       </div>
 
       {filtrados.length === 0 ? (

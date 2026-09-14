@@ -3,9 +3,14 @@ import { SiteNav } from '@/components/site-nav'
 import { InicialHeader } from '@/components/inicial/inicial-header'
 import { CategoryCard } from '@/components/inicial/category-card'
 import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
+import { GlobalSearch } from '@/components/inicial/global-search'
 import { SiteFooter } from '@/components/site-footer'
 import { categorias } from '@/lib/inicial/categories'
-import { contarRecursosPorCategoria, getRecursosDestacados } from '@/lib/inicial/resources'
+import {
+  contarRecursosPorCategoria,
+  getRecursosDestacados,
+  recursosIniciales,
+} from '@/lib/inicial/resources'
 
 export const metadata: Metadata = {
   title: 'Recursero Digital · Educación Inicial | DTE Región 1',
@@ -15,6 +20,7 @@ export const metadata: Metadata = {
 
 export default function InicialPage() {
   const destacados = getRecursosDestacados()
+  const activos = recursosIniciales.filter((r) => r.status === 'active')
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
@@ -28,33 +34,40 @@ export default function InicialPage() {
         </p>
       </div>
 
-      {destacados.length > 0 && (
-        <section className="mx-auto w-full max-w-4xl px-6 pt-10 sm:px-8">
-          <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Recursos destacados
-          </h2>
-          <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {destacados.map((r) => (
-              <li key={r.id}>
-                <InicialResourceCard recurso={r} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <div className="pt-8 sm:pt-10">
+        <GlobalSearch recursos={activos}>
+          {destacados.length > 0 && (
+            <section className="mx-auto w-full max-w-4xl px-6 pt-2 sm:px-8">
+              <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Recursos destacados
+              </h2>
+              <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {destacados.map((r) => (
+                  <li key={r.id}>
+                    <InicialResourceCard recurso={r} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-      <section id="categorias" className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-12">
-        <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          Categorías
-        </h2>
-        <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {categorias.map((categoria) => (
-            <li key={categoria.slug}>
-              <CategoryCard categoria={categoria} count={contarRecursosPorCategoria(categoria.slug)} />
-            </li>
-          ))}
-        </ul>
-      </section>
+          <section id="categorias" className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-12">
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Categorías
+            </h2>
+            <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {categorias.map((categoria) => (
+                <li key={categoria.slug}>
+                  <CategoryCard
+                    categoria={categoria}
+                    count={contarRecursosPorCategoria(categoria.slug)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+        </GlobalSearch>
+      </div>
 
       <SiteFooter />
     </main>
