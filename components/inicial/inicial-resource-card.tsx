@@ -19,7 +19,7 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
       <div className="flex flex-wrap items-center gap-2">
         {recurso.official && (
           <span className="rounded-full bg-magenta/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-magenta">
-            Oficial PBA
+            {recurso.provider === 'Provincia de Buenos Aires' ? 'Oficial PBA' : 'Oficial'}
           </span>
         )}
         {recurso.featured && !recurso.official && (

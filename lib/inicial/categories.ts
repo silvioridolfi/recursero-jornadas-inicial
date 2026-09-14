@@ -62,8 +62,8 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'herramientas-docentes',
-    nombre: 'Herramientas para docentes',
-    descripcion: 'Recursos de apoyo para la planificación y la enseñanza.',
+    nombre: 'Herramientas y formación docente',
+    descripcion: 'Tutoriales, microcursos y materiales para planificar, producir e integrar tecnología en la enseñanza.',
     icon: ToolboxIcon,
   },
 ]

@@ -14,6 +14,8 @@ const TIPOS: TipoRecurso[] = [
   'Documento',
   'Colección',
   'Material docente',
+  'Interactivo',
+  'Libro electrónico',
 ]
 const COSTOS: Costo[] = ['Gratuito', 'Freemium', 'Pago']
 const ORIGENES: Origen[] = [

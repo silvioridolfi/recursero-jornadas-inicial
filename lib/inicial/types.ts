@@ -22,6 +22,8 @@ export type TipoRecurso =
   | 'Documento'
   | 'Colección'
   | 'Material docente'
+  | 'Interactivo'
+  | 'Libro electrónico'
 
 export type Costo = 'Gratuito' | 'Freemium' | 'Pago'
 
