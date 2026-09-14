@@ -13,27 +13,34 @@ export function SiteHeader() {
       {/* Formas decorativas */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-6 right-12 h-16 w-16 rounded-full bg-celeste/40 blur-[1px]"
+        className="pointer-events-none absolute -bottom-8 right-16 h-16 w-16 rounded-full bg-celeste/30 blur-[1px] sm:right-24"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-16 right-40 h-5 w-5 rounded-full bg-rosa/60"
+        className="pointer-events-none absolute bottom-6 right-48 h-4 w-4 rounded-full bg-rosa/50 sm:right-64"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-4 top-24 h-14 w-14 rotate-45 rounded-2xl border-[5px] border-magenta/60 sm:right-16 sm:top-16 sm:h-20 sm:w-20"
+        className="pointer-events-none absolute right-6 top-1/2 h-12 w-12 -translate-y-1/2 rotate-45 rounded-2xl border-[5px] border-white/20 sm:right-10 sm:h-16 sm:w-16"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-10 right-24 h-3 w-3 rounded-full bg-violeta/50"
+        className="pointer-events-none absolute bottom-16 right-6 h-3 w-3 rounded-full bg-violeta/50"
       />
 
       <div className="relative mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 sm:px-8 sm:py-12">
-        <img
-          src="/images/logo-dte-header.png"
-          alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"
-          className="h-8 w-auto object-contain sm:h-9"
-        />
+        <div className="flex items-center justify-between gap-4">
+          <img
+            src="/images/logo-dte-header.svg"
+            alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"
+            className="h-8 w-auto object-contain sm:h-9"
+          />
+          <img
+            src="/images/avatar-r1.jpg"
+            alt="Región 1"
+            className="h-11 w-11 shrink-0 rounded-xl object-cover ring-1 ring-white/25 sm:h-12 sm:w-12"
+          />
+        </div>
 
         <div className="flex flex-col gap-4">
           <h1 className="text-balance text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
