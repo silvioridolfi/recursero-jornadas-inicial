@@ -7,7 +7,7 @@ export function SiteFooter({ wide = false }: { wide?: boolean }) {
         <img
           src="/images/logo-dte-footer.png"
           alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"
-          className="h-14 w-auto object-contain sm:h-16"
+          className="h-auto w-auto max-w-full object-contain max-h-20 sm:max-h-28 md:max-h-36 lg:max-h-44"
         />
       </div>
     </footer>
