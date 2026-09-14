@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-export function SiteNav() {
+export function SiteNav({ wide = false }: { wide?: boolean }) {
   return (
     <div className="border-b border-border bg-secondary">
       <nav
         aria-label="Secciones del sitio"
-        className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-2.5 text-sm sm:px-8"
+        className={`mx-auto flex items-center justify-between gap-4 px-6 py-2.5 text-sm sm:px-8 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}
       >
         <span className="hidden font-semibold text-muted-foreground sm:inline">
           DTE · Región 1

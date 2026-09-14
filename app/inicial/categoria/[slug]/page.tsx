@@ -32,7 +32,7 @@ export default async function CategoriaPage({ params }: { params: Params }) {
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
-      <SiteNav />
+      <SiteNav wide />
       <header
         className="relative isolate overflow-hidden"
         style={{
@@ -48,7 +48,7 @@ export default async function CategoriaPage({ params }: { params: Params }) {
           className="pointer-events-none absolute right-24 top-8 h-2.5 w-2.5 rounded-full bg-white/30"
         />
 
-        <div className="relative mx-auto flex max-w-4xl flex-col gap-4 px-6 py-8 sm:px-8 sm:py-10">
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 sm:px-8 sm:py-10">
           <div className="flex items-start justify-between gap-4">
             <Link href="/inicial" className="w-fit text-sm font-semibold text-white/80 hover:text-white hover:underline">
               ← Recursero Digital
@@ -76,7 +76,7 @@ export default async function CategoriaPage({ params }: { params: Params }) {
         </div>
       </header>
 
-      <div className="mx-auto w-full max-w-4xl flex-1 px-6 py-10 sm:px-8 sm:py-12">
+      <div className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8 sm:py-12">
         {categoria.slug === 'pensamiento-computacional' && (
           <Link
             href="/"
@@ -99,7 +99,7 @@ export default async function CategoriaPage({ params }: { params: Params }) {
         <CategoryExplorer recursos={recursos} />
       </div>
 
-      <SiteFooter />
+      <SiteFooter wide />
     </main>
   )
 }

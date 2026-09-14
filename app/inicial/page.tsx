@@ -24,10 +24,10 @@ export default function InicialPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
-      <SiteNav />
+      <SiteNav wide />
       <InicialHeader />
 
-      <div className="mx-auto max-w-4xl px-6 pb-2 pt-10 sm:px-8 sm:pt-12">
+      <div className="mx-auto max-w-6xl px-6 pb-2 pt-10 sm:px-8 sm:pt-12">
         <p className="max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
           Una selección de sitios, aplicaciones, materiales y propuestas para acompañar la
           enseñanza en el Nivel Inicial.
@@ -37,11 +37,11 @@ export default function InicialPage() {
       <div className="pt-8 sm:pt-10">
         <GlobalSearch recursos={activos}>
           {destacados.length > 0 && (
-            <section className="mx-auto w-full max-w-4xl px-6 pt-2 sm:px-8">
+            <section className="mx-auto w-full max-w-6xl px-6 pt-2 sm:px-8">
               <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Recursos destacados
               </h2>
-              <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {destacados.map((r) => (
                   <li key={r.id}>
                     <InicialResourceCard recurso={r} />
@@ -51,11 +51,11 @@ export default function InicialPage() {
             </section>
           )}
 
-          <section id="categorias" className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-12">
+          <section id="categorias" className="mx-auto w-full max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
             <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Categorías
             </h2>
-            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {categorias.map((categoria) => (
                 <li key={categoria.slug}>
                   <CategoryCard
@@ -69,7 +69,7 @@ export default function InicialPage() {
         </GlobalSearch>
       </div>
 
-      <SiteFooter />
+      <SiteFooter wide />
     </main>
   )
 }

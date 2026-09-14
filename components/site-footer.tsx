@@ -1,7 +1,9 @@
-export function SiteFooter() {
+export function SiteFooter({ wide = false }: { wide?: boolean }) {
   return (
     <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto flex max-w-4xl justify-center px-6 py-10 sm:px-8 sm:py-12">
+      <div
+        className={`mx-auto flex justify-center px-6 py-10 sm:px-8 sm:py-12 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}
+      >
         <img
           src="/images/logo-dte-footer.png"
           alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"

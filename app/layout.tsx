@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Encode_Sans } from 'next/font/google'
+import { BackToTop } from '@/components/back-to-top'
 import './globals.css'
 
 const encodeSans = Encode_Sans({
@@ -65,6 +66,7 @@ export default function RootLayout({
     <html lang="es" className={`${encodeSans.variable} bg-background`}>
       <body className="antialiased font-sans">
         {children}
+        <BackToTop />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

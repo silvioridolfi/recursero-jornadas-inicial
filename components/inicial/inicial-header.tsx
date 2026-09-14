@@ -19,7 +19,7 @@ export function InicialHeader() {
         className="pointer-events-none absolute right-6 top-1/2 h-12 w-12 -translate-y-1/2 rotate-45 rounded-2xl border-[5px] border-white/20 sm:right-10 sm:h-16 sm:w-16"
       />
 
-      <div className="relative mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8 sm:px-8 sm:py-12">
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8 sm:px-8 sm:py-12">
         <img
           src="/images/avatar-r1.jpg"
           alt="Región 1"

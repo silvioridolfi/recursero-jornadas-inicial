@@ -28,7 +28,7 @@ export function GlobalSearch({ recursos, children }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="mx-auto w-full max-w-4xl px-6 sm:px-8">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
         <label htmlFor="buscador-global" className="sr-only">
           ¿Qué recurso estás buscando?
         </label>
@@ -43,7 +43,7 @@ export function GlobalSearch({ recursos, children }: Props) {
       </div>
 
       {buscando ? (
-        <section className="mx-auto w-full max-w-4xl px-6 pb-4 sm:px-8">
+        <section className="mx-auto w-full max-w-6xl px-6 pb-4 sm:px-8">
           <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {resultados.length === 0
               ? 'Sin resultados'
@@ -60,7 +60,7 @@ export function GlobalSearch({ recursos, children }: Props) {
               </p>
             </div>
           ) : (
-            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {resultados.map((r) => (
                 <li key={r.id} className="flex flex-col gap-1.5">
                   <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
