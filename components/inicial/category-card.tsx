@@ -12,7 +12,7 @@ export function CategoryCard({ categoria, count }: Props) {
   return (
     <Link
       href={`/inicial/categoria/${categoria.slug}`}
-      className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
+      className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
     >
       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-azul/10 text-azul">
         <Icon />
@@ -25,7 +25,7 @@ export function CategoryCard({ categoria, count }: Props) {
           {categoria.descripcion}
         </span>
       </span>
-      <span className="mt-1 flex items-center justify-between text-sm">
+      <span className="mt-auto flex items-center justify-between pt-1 text-sm">
         <span className="text-muted-foreground">
           {count === 0 ? 'Próximamente' : `${count} recurso${count === 1 ? '' : 's'}`}
         </span>

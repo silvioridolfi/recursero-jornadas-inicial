@@ -60,7 +60,7 @@ export function GlobalSearch({ recursos, children }: Props) {
               </p>
             </div>
           ) : (
-            <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {resultados.map((r) => (
                 <li key={r.id} className="flex flex-col gap-1.5">
                   <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">

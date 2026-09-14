@@ -14,7 +14,7 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
       href={recurso.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
+      className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
     >
       <div className="flex flex-wrap items-center gap-2">
         {recurso.official && (
