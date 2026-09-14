@@ -1,3 +1,4 @@
+import { SiteNav } from '@/components/site-nav'
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
 import { ResourceGrid } from '@/components/resource-grid'
@@ -13,6 +14,7 @@ export default function Page() {
         Saltar al contenido
       </a>
       <main className="flex min-h-screen flex-col bg-background">
+        <SiteNav />
         <SiteHeader />
         <div id="contenido" className="flex flex-1 flex-col">
           <Hero />

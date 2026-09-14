@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SiteNav } from '@/components/site-nav'
 import { InicialHeader } from '@/components/inicial/inicial-header'
 import { CategoryCard } from '@/components/inicial/category-card'
 import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
@@ -17,6 +18,7 @@ export default function InicialPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
+      <SiteNav />
       <InicialHeader />
 
       <div className="mx-auto max-w-4xl px-6 pb-2 pt-10 sm:px-8 sm:pt-12">

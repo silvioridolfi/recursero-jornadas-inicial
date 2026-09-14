@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { SiteNav } from '@/components/site-nav'
 import { SiteFooter } from '@/components/site-footer'
 import { CategoryExplorer } from '@/components/inicial/category-explorer'
 import { categorias, getCategoria } from '@/lib/inicial/categories'
@@ -32,6 +33,7 @@ export default async function CategoriaPage({ params }: { params: Params }) {
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
+      <SiteNav />
       <header
         className="relative isolate overflow-hidden"
         style={{
