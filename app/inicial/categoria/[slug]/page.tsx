@@ -28,7 +28,6 @@ export default async function CategoriaPage({ params }: { params: Params }) {
   const categoria = getCategoria(slug)
   if (!categoria) notFound()
 
-  const Icon = categoria.icon
   const recursos = getRecursosPorCategoria(categoria.slug)
 
   return (
@@ -40,13 +39,32 @@ export default async function CategoriaPage({ params }: { params: Params }) {
           background: 'linear-gradient(115deg, #0B3B63 0%, #6F3976 45%, #D31C6B 78%, #F43F91 100%)',
         }}
       >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-6 right-10 h-3 w-3 rounded-full bg-celeste/50"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-24 top-8 h-2.5 w-2.5 rounded-full bg-white/30"
+        />
+
         <div className="relative mx-auto flex max-w-4xl flex-col gap-4 px-6 py-8 sm:px-8 sm:py-10">
-          <Link href="/inicial" className="w-fit text-sm font-semibold text-white/80 hover:text-white hover:underline">
-            ← Recursero Digital
-          </Link>
+          <div className="flex items-start justify-between gap-4">
+            <Link href="/inicial" className="w-fit text-sm font-semibold text-white/80 hover:text-white hover:underline">
+              ← Recursero Digital
+            </Link>
+            <span className="shrink-0 rounded-full bg-magenta px-3.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-sm">
+              Educación Inicial
+            </span>
+          </div>
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white">
-              <Icon />
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-magenta text-white shadow-sm"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
             </span>
             <h1 className="text-balance text-2xl font-black leading-tight text-white sm:text-3xl">
               {categoria.nombre}

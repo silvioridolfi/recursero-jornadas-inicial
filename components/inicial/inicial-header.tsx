@@ -30,9 +30,19 @@ export function InicialHeader() {
           <span className="inline-flex w-fit items-center rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
             DTE Región 1 · Provincia de Buenos Aires
           </span>
-          <h1 className="text-balance text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
-            Recursero Digital
-          </h1>
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-magenta text-white shadow-sm"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 5 7 7-7 7" />
+              </svg>
+            </span>
+            <h1 className="text-balance text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              Recursero Digital
+            </h1>
+          </div>
           <p className="text-lg font-semibold text-white/90 sm:text-xl">Educación Inicial</p>
         </div>
       </div>
