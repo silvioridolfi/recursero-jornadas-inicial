@@ -42,7 +42,10 @@ export function CategoryChipsNav({
 
   return (
     <nav aria-label="Otras categorías" className="border-b border-border bg-secondary">
-      <div ref={scrollerRef} className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-3 sm:px-8">
+      <div
+        ref={scrollerRef}
+        className="mx-auto flex max-w-6xl flex-nowrap gap-2 overflow-x-auto px-6 py-3 sm:flex-wrap sm:overflow-visible sm:px-8"
+      >
         {categorias.map((c) => (
           <Link
             key={c.slug}
