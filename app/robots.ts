@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const siteUrl = 'https://recursero-jornadas-inicial.vercel.app'
+const siteUrl = 'https://recurserodigitaldte.vercel.app'
 
 export default function robots(): MetadataRoute.Robots {
   return {

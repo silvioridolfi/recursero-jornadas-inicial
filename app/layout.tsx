@@ -10,7 +10,7 @@ const encodeSans = Encode_Sans({
   variable: '--font-encode-sans',
 })
 
-const siteUrl = 'https://recursero-jornadas-inicial.vercel.app'
+const siteUrl = 'https://recurserodigitaldte.vercel.app'
 const title = 'Recursero | Jornadas de Pensamiento Computacional, Programación y Robótica'
 const description =
   'Recursero de las Jornadas de Pensamiento Computacional, Programación y Robótica en Nivel Inicial. Dirección de Tecnología Educativa (DTE), Región 1, Dirección General de Cultura y Educación, Provincia de Buenos Aires.'
