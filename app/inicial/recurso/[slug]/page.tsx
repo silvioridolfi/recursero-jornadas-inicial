@@ -30,9 +30,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 function Bloque({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5 border-t border-border py-4 first:border-t-0 first:pt-0">
-      <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+      <h2 className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
         {titulo}
-      </span>
+      </h2>
       <div className="text-sm leading-relaxed text-foreground">{children}</div>
     </div>
   )
@@ -204,7 +204,15 @@ export default async function RecursoPage({ params }: { params: Params }) {
         </Bloque>
 
         <Bloque titulo="Verificación">
-          <span className="text-muted-foreground">Verificado: {verificadoTexto}</span>
+          {recurso.verificationStatus && recurso.verificationStatus !== 'Activo' ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-rosa/15 px-2.5 py-1 text-xs font-semibold text-magenta">
+              {recurso.verificationStatus === 'Revisar'
+                ? '⚠ A revisar'
+                : '⚠ Enlace no disponible'}
+            </span>
+          ) : (
+            <span className="text-muted-foreground">Verificado: {verificadoTexto}</span>
+          )}
         </Bloque>
 
         <div className="mt-4">

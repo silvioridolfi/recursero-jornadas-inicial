@@ -49,6 +49,7 @@ export function FavoriteButton({ id, withLabel = false }: { id: string; withLabe
         setFav(toggleFavorito(id))
       }}
       aria-pressed={fav}
+      aria-label={fav ? 'Quitar de guardados' : 'Guardar recurso'}
       className={`relative z-10 flex min-h-[36px] items-center gap-1.5 rounded-full px-2.5 text-xs font-semibold transition-colors ${
         fav ? 'bg-magenta/10 text-magenta' : 'text-muted-foreground hover:text-magenta'
       }`}

@@ -37,7 +37,7 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
       <div className="flex flex-col gap-1">
         <Link
           href={`/inicial/recurso/${slug}`}
-          className="text-base font-bold leading-snug text-foreground after:absolute after:inset-0 hover:underline"
+          className="text-base font-bold leading-snug text-foreground after:absolute after:inset-0 after:content-[''] hover:underline"
         >
           {recurso.title}
         </Link>
@@ -63,7 +63,11 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
         <span>
           {recurso.levels.join(', ')} · {recurso.pricing}
         </span>
-        <span>Verificado · {formatFecha(recurso.verifiedAt)}</span>
+        <span>
+          {recurso.verificationStatus && recurso.verificationStatus !== 'Activo'
+            ? `⚠ ${recurso.verificationStatus}`
+            : `Verificado · ${formatFecha(recurso.verifiedAt)}`}
+        </span>
       </div>
 
       <a
