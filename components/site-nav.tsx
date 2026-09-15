@@ -23,6 +23,14 @@ export function SiteNav({ wide = false }: { wide?: boolean }) {
           >
             Recursero Digital · Inicial
           </Link>
+          {wide && (
+            <Link
+              href="/inicial/favoritos"
+              className="font-medium text-foreground transition-colors hover:text-azul hover:underline"
+            >
+              Mis recursos
+            </Link>
+          )}
         </div>
       </nav>
     </div>

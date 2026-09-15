@@ -2,7 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
-import type { RecursoInicial, Sala, TipoRecurso, Costo, Origen } from '@/lib/inicial/types'
+import { matchesFiltros, matchesQuery } from '@/lib/inicial/search'
+import type {
+  RecursoInicial,
+  Sala,
+  TipoRecurso,
+  Costo,
+  Origen,
+  AreaCurricular,
+  Enfoque,
+  Modalidad,
+  Conectividad,
+} from '@/lib/inicial/types'
 
 const SALAS: Sala[] = ['Sala 2', 'Sala 3', 'Sala 4', 'Sala 5', 'Docentes']
 const TIPOS: TipoRecurso[] = [
@@ -24,13 +35,45 @@ const ORIGENES: Origen[] = [
   'Institución educativa',
   'Otro',
 ]
+const AREAS_CURRICULARES: AreaCurricular[] = [
+  'Formación personal y social',
+  'Prácticas del lenguaje',
+  'Matemática',
+  'Ambiente social y natural',
+  'Juego',
+  'Educación Artística',
+  'Educación Física',
+  'Educación Digital',
+]
+const ENFOQUES: Enfoque[] = [
+  'Educación Digital',
+  'Ciencias de la Computación',
+  'Pensamiento computacional',
+  'Programación',
+  'Robótica',
+  'Cultura digital',
+  'Multialfabetización',
+  'Ciudadanía digital',
+  'Creación y producción digital',
+  'Inclusión y accesibilidad',
+  'ESI',
+  'Educación Ambiental Integral (EAI)',
+  'Interculturalidad',
+]
+const MODALIDADES: Modalidad[] = ['Digital', 'Analógica', 'Mixta']
+const CONECTIVIDADES: Conectividad[] = [
+  'Requiere internet',
+  'Funciona sin internet',
+  'Tiene modalidad offline',
+  'Parcialmente offline',
+]
 
 const selectClass =
   'min-h-[44px] rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul'
 
-// Sincroniza los filtros con la URL (?q=&sala=&tipo=&costo=&origen=) usando
-// la API nativa del navegador, sin next/navigation, para no requerir un
-// límite de Suspense en páginas generadas estáticamente.
+// Sincroniza los filtros con la URL usando la API nativa del navegador, sin
+// next/navigation, para no requerir un límite de Suspense en páginas
+// generadas estáticamente.
 function useUrlParam(key: string) {
   const [value, setValue] = useState('')
   const hydrated = useRef(false)
@@ -59,24 +102,29 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
   const [tipo, setTipo] = useUrlParam('tipo')
   const [costo, setCosto] = useUrlParam('costo')
   const [origen, setOrigen] = useUrlParam('origen')
+  const [areaCurricular, setAreaCurricular] = useUrlParam('area')
+  const [enfoque, setEnfoque] = useUrlParam('enfoque')
+  const [modalidad, setModalidad] = useUrlParam('modalidad')
+  const [conectividad, setConectividad] = useUrlParam('conectividad')
   const [filtersOpen, setFiltersOpen] = useState(false)
 
-  const filtrados = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    return recursos.filter((r) => {
-      if (sala && !r.levels.includes(sala as Sala)) return false
-      if (tipo && r.type !== tipo) return false
-      if (costo && r.pricing !== costo) return false
-      if (origen && r.provider !== origen) return false
-      if (!q) return true
-      const haystack = [r.title, r.description, r.category, ...r.levels, ...r.areas, ...r.tags]
-        .join(' ')
-        .toLowerCase()
-      return haystack.includes(q)
-    })
-  }, [recursos, query, sala, tipo, costo, origen])
+  const filtros = { sala, tipo, costo, origen, areaCurricular, enfoque, modalidad, conectividad }
 
-  const filtrosSeleccionados = [sala, tipo, costo, origen].filter(Boolean).length
+  const filtrados = useMemo(() => {
+    return recursos.filter((r) => matchesFiltros(r, filtros) && matchesQuery(r, query))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recursos, query, sala, tipo, costo, origen, areaCurricular, enfoque, modalidad, conectividad])
+
+  const filtrosSeleccionados = [
+    sala,
+    tipo,
+    costo,
+    origen,
+    areaCurricular,
+    enfoque,
+    modalidad,
+    conectividad,
+  ].filter(Boolean).length
   const hayFiltrosActivos = Boolean(query || filtrosSeleccionados)
 
   return (
@@ -115,60 +163,64 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
           className={`${filtersOpen ? 'flex' : 'hidden'} flex-wrap gap-2 sm:flex`}
         >
           <legend className="sr-only">Filtros de búsqueda</legend>
-          <select
-            aria-label="Filtrar por sala"
-            value={sala}
-            onChange={(e) => setSala(e.target.value)}
-            className={selectClass}
-          >
+          <select aria-label="Filtrar por sala" value={sala} onChange={(e) => setSala(e.target.value)} className={selectClass}>
             <option value="">Todas las salas</option>
-            {SALAS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
+            {SALAS.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
 
-          <select
-            aria-label="Filtrar por tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            className={selectClass}
-          >
+          <select aria-label="Filtrar por tipo" value={tipo} onChange={(e) => setTipo(e.target.value)} className={selectClass}>
             <option value="">Todos los tipos</option>
-            {TIPOS.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
+            {TIPOS.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
 
           <select
-            aria-label="Filtrar por costo"
-            value={costo}
-            onChange={(e) => setCosto(e.target.value)}
+            aria-label="Filtrar por área curricular"
+            value={areaCurricular}
+            onChange={(e) => setAreaCurricular(e.target.value)}
             className={selectClass}
           >
+            <option value="">Todas las áreas</option>
+            {AREAS_CURRICULARES.map((a) => <option key={a} value={a}>{a}</option>)}
+          </select>
+
+          <select
+            aria-label="Filtrar por enfoque"
+            value={enfoque}
+            onChange={(e) => setEnfoque(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">Todos los enfoques</option>
+            {ENFOQUES.map((e2) => <option key={e2} value={e2}>{e2}</option>)}
+          </select>
+
+          <select aria-label="Filtrar por costo" value={costo} onChange={(e) => setCosto(e.target.value)} className={selectClass}>
             <option value="">Cualquier costo</option>
-            {COSTOS.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
+            {COSTOS.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+
+          <select aria-label="Filtrar por origen" value={origen} onChange={(e) => setOrigen(e.target.value)} className={selectClass}>
+            <option value="">Cualquier origen</option>
+            {ORIGENES.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
 
           <select
-            aria-label="Filtrar por origen"
-            value={origen}
-            onChange={(e) => setOrigen(e.target.value)}
+            aria-label="Filtrar por modalidad"
+            value={modalidad}
+            onChange={(e) => setModalidad(e.target.value)}
             className={selectClass}
           >
-            <option value="">Cualquier origen</option>
-            {ORIGENES.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
+            <option value="">Cualquier modalidad</option>
+            {MODALIDADES.map((m) => <option key={m} value={m}>{m}</option>)}
+          </select>
+
+          <select
+            aria-label="Filtrar por conectividad"
+            value={conectividad}
+            onChange={(e) => setConectividad(e.target.value)}
+            className={selectClass}
+          >
+            <option value="">Con o sin internet</option>
+            {CONECTIVIDADES.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
 
           {hayFiltrosActivos && (
@@ -180,6 +232,10 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
                 setTipo('')
                 setCosto('')
                 setOrigen('')
+                setAreaCurricular('')
+                setEnfoque('')
+                setModalidad('')
+                setConectividad('')
               }}
               className="min-h-[44px] rounded-lg px-3 py-2.5 text-sm font-semibold text-azul hover:underline"
             >

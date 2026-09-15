@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import { ExternalLinkIcon } from '@/components/resource-icons'
+import { FavoriteButton } from '@/components/inicial/favorite-button'
 import type { RecursoInicial } from '@/lib/inicial/types'
 
 const formatFecha = (iso: string) =>
@@ -9,13 +11,10 @@ const formatFecha = (iso: string) =>
   })
 
 export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
+  const slug = recurso.slug ?? recurso.id
+
   return (
-    <a
-      href={recurso.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
-    >
+    <div className="group relative flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm transition-colors hover:border-azul/30">
       <div className="flex flex-wrap items-center gap-2">
         {recurso.official && (
           <span className="rounded-full bg-magenta/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-magenta">
@@ -30,11 +29,18 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
         <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           {recurso.type}
         </span>
-        <ExternalLinkIcon className="text-muted-foreground/70" />
+        <div className="ml-auto flex items-center gap-1">
+          <FavoriteButton id={recurso.id} />
+        </div>
       </div>
 
       <div className="flex flex-col gap-1">
-        <span className="text-base font-bold leading-snug text-foreground">{recurso.title}</span>
+        <Link
+          href={`/inicial/recurso/${slug}`}
+          className="text-base font-bold leading-snug text-foreground after:absolute after:inset-0 hover:underline"
+        >
+          {recurso.title}
+        </Link>
         <span className="text-sm leading-relaxed text-muted-foreground">
           {recurso.description}
         </span>
@@ -57,8 +63,18 @@ export function InicialResourceCard({ recurso }: { recurso: RecursoInicial }) {
         <span>
           {recurso.levels.join(', ')} · {recurso.pricing}
         </span>
-        <span>Enlace verificado · {formatFecha(recurso.verifiedAt)}</span>
+        <span>Verificado · {formatFecha(recurso.verifiedAt)}</span>
       </div>
-    </a>
+
+      <a
+        href={recurso.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative z-10 flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-border bg-secondary text-sm font-semibold text-foreground transition-colors hover:border-azul/40 hover:text-azul"
+      >
+        Abrir recurso
+        <ExternalLinkIcon className="text-current" />
+      </a>
+    </div>
   )
 }

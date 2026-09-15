@@ -6,6 +6,7 @@ import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
 import { GlobalSearch } from '@/components/inicial/global-search'
 import { SiteFooter } from '@/components/site-footer'
 import { categorias } from '@/lib/inicial/categories'
+import type { CategoriaSlug } from '@/lib/inicial/types'
 import {
   contarRecursosPorCategoria,
   getRecursosDestacados,
@@ -21,6 +22,15 @@ export const metadata: Metadata = {
 export default function InicialPage() {
   const destacados = getRecursosDestacados()
   const activos = recursosIniciales.filter((r) => r.status === 'active')
+  const paraEmpezarSlugs: CategoriaSlug[] = [
+    'educacion-digital',
+    'pensamiento-computacional',
+    'literatura-y-cuentos',
+    'matematica-y-juegos',
+    'exploracion-del-ambiente',
+    'arte-y-creatividad',
+  ]
+  const paraEmpezar = categorias.filter((c) => paraEmpezarSlugs.includes(c.slug))
 
   return (
     <main className="flex min-h-screen flex-col bg-background">
@@ -36,8 +46,27 @@ export default function InicialPage() {
 
       <div className="pt-8 sm:pt-10">
         <GlobalSearch recursos={activos}>
+          <section className="mx-auto w-full max-w-6xl px-6 pt-2 sm:px-8">
+            <h2 className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Para empezar
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Algunos recorridos para entrar al recursero según lo que estés buscando.
+            </p>
+            <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {paraEmpezar.map((categoria) => (
+                <li key={categoria.slug}>
+                  <CategoryCard
+                    categoria={categoria}
+                    count={contarRecursosPorCategoria(categoria.slug)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+
           {destacados.length > 0 && (
-            <section className="mx-auto w-full max-w-6xl px-6 pt-2 sm:px-8">
+            <section className="mx-auto w-full max-w-6xl px-6 pt-10 sm:px-8">
               <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Recursos destacados
               </h2>
@@ -53,7 +82,7 @@ export default function InicialPage() {
 
           <section id="categorias" className="mx-auto w-full max-w-6xl px-6 py-10 sm:px-8 sm:py-12">
             <h2 className="mb-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Categorías
+              Todas las categorías
             </h2>
             <ul role="list" className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {categorias.map((categoria) => (
