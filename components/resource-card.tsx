@@ -30,7 +30,7 @@ export function ResourceCard({ tag, title, href, accent, icon: Icon }: Resource)
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group flex items-center gap-4 rounded-md border border-border ${styles.border} border-l-4 bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul sm:p-5`}
+      className={`group flex h-full items-center gap-4 rounded-md border border-border ${styles.border} border-l-4 bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul sm:p-5`}
     >
       <span
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-md ${styles.iconBg} ${styles.iconText}`}
