@@ -4,7 +4,7 @@
   <defs>
     <style>
       .st0 {
-        font-family: EncodeSans-Medium, 'Encode Sans';
+        font-family: EncodeSans-Medium, 'Encode Sans', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
         font-weight: 500;
       }
 
@@ -19,7 +19,7 @@
       }
 
       .st4 {
-        font-family: EncodeSans-Bold, 'Encode Sans';
+        font-family: EncodeSans-Bold, 'Encode Sans', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
         font-weight: 700;
       }
 
