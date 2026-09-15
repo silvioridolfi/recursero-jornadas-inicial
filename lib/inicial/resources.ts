@@ -196,7 +196,7 @@ export const recursosIniciales: RecursoInicial[] = [
     areas: ['Literatura'],
     platforms: ['Web'],
     pricing: 'Gratuito',
-    url: 'https://www.bnm.me.gov.ar/',
+    url: 'https://bnm.educacion.gob.ar/',
     provider: 'Nación',
     official: true,
     featured: false,

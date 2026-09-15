@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
 import type { RecursoInicial, Sala, TipoRecurso, Costo, Origen } from '@/lib/inicial/types'
 
@@ -28,12 +28,38 @@ const ORIGENES: Origen[] = [
 const selectClass =
   'min-h-[44px] rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul'
 
+// Sincroniza los filtros con la URL (?q=&sala=&tipo=&costo=&origen=) usando
+// la API nativa del navegador, sin next/navigation, para no requerir un
+// límite de Suspense en páginas generadas estáticamente.
+function useUrlParam(key: string) {
+  const [value, setValue] = useState('')
+  const hydrated = useRef(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setValue(params.get(key) ?? '')
+    hydrated.current = true
+  }, [key])
+
+  useEffect(() => {
+    if (!hydrated.current) return
+    const params = new URLSearchParams(window.location.search)
+    if (value) params.set(key, value)
+    else params.delete(key)
+    const query = params.toString()
+    window.history.replaceState(null, '', query ? `?${query}` : window.location.pathname)
+  }, [key, value])
+
+  return [value, setValue] as const
+}
+
 export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
-  const [query, setQuery] = useState('')
-  const [sala, setSala] = useState('')
-  const [tipo, setTipo] = useState('')
-  const [costo, setCosto] = useState('')
-  const [origen, setOrigen] = useState('')
+  const [query, setQuery] = useUrlParam('q')
+  const [sala, setSala] = useUrlParam('sala')
+  const [tipo, setTipo] = useUrlParam('tipo')
+  const [costo, setCosto] = useUrlParam('costo')
+  const [origen, setOrigen] = useUrlParam('origen')
+  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const filtrados = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -50,7 +76,8 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
     })
   }, [recursos, query, sala, tipo, costo, origen])
 
-  const hayFiltrosActivos = Boolean(query || sala || tipo || costo || origen)
+  const filtrosSeleccionados = [sala, tipo, costo, origen].filter(Boolean).length
+  const hayFiltrosActivos = Boolean(query || filtrosSeleccionados)
 
   return (
     <div className="flex flex-col gap-6">
@@ -58,16 +85,35 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
         <label htmlFor="buscador-recursos" className="sr-only">
           ¿Qué recurso estás buscando?
         </label>
-        <input
-          id="buscador-recursos"
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="¿Qué recurso estás buscando?"
-          className="rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
-        />
+        <div className="flex gap-2">
+          <input
+            id="buscador-recursos"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="¿Qué recurso estás buscando?"
+            className="flex-1 rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-azul"
+          />
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((v) => !v)}
+            aria-expanded={filtersOpen}
+            aria-controls="panel-filtros"
+            className="flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground shadow-sm sm:hidden"
+          >
+            Filtros
+            {filtrosSeleccionados > 0 && (
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-magenta text-[11px] font-bold text-white">
+                {filtrosSeleccionados}
+              </span>
+            )}
+          </button>
+        </div>
 
-        <fieldset className="flex flex-wrap gap-2">
+        <fieldset
+          id="panel-filtros"
+          className={`${filtersOpen ? 'flex' : 'hidden'} flex-wrap gap-2 sm:flex`}
+        >
           <legend className="sr-only">Filtros de búsqueda</legend>
           <select
             aria-label="Filtrar por sala"
@@ -142,6 +188,12 @@ export function CategoryExplorer({ recursos }: { recursos: RecursoInicial[] }) {
           )}
         </fieldset>
       </div>
+
+      {hayFiltrosActivos && (
+        <p className="text-sm text-muted-foreground" aria-live="polite">
+          {filtrados.length} de {recursos.length} recurso{recursos.length === 1 ? '' : 's'}
+        </p>
+      )}
 
       {filtrados.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border bg-card/50 px-6 py-10 text-center">

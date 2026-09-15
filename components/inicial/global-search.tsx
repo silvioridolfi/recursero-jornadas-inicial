@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { InicialResourceCard } from '@/components/inicial/inicial-resource-card'
 import { getCategoria } from '@/lib/inicial/categories'
 import type { RecursoInicial } from '@/lib/inicial/types'
@@ -12,6 +12,24 @@ type Props = {
 
 export function GlobalSearch({ recursos, children }: Props) {
   const [query, setQuery] = useState('')
+  const hydrated = useRef(false)
+
+  // Lee ?q= al cargar y lo mantiene sincronizado, así un link con
+  // búsqueda aplicada se puede compartir o recargar sin perderla.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setQuery(params.get('q') ?? '')
+    hydrated.current = true
+  }, [])
+
+  useEffect(() => {
+    if (!hydrated.current) return
+    const params = new URLSearchParams(window.location.search)
+    if (query) params.set('q', query)
+    else params.delete('q')
+    const search = params.toString()
+    window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname)
+  }, [query])
 
   const resultados = useMemo(() => {
     const q = query.trim().toLowerCase()

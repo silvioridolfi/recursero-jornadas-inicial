@@ -76,6 +76,28 @@ export default async function CategoriaPage({ params }: { params: Params }) {
         </div>
       </header>
 
+      <nav
+        aria-label="Otras categorías"
+        className="border-b border-border bg-secondary"
+      >
+        <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-3 sm:px-8">
+          {categorias.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/inicial/categoria/${c.slug}`}
+              aria-current={c.slug === categoria.slug ? 'page' : undefined}
+              className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
+                c.slug === categoria.slug
+                  ? 'bg-azul text-white'
+                  : 'bg-card text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {c.nombre}
+            </Link>
+          ))}
+        </div>
+      </nav>
+
       <div className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8 sm:py-12">
         {categoria.slug === 'pensamiento-computacional' && (
           <Link

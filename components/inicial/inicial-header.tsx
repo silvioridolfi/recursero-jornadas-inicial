@@ -1,4 +1,9 @@
+import { categorias } from '@/lib/inicial/categories'
+import { recursosIniciales } from '@/lib/inicial/resources'
+
 export function InicialHeader() {
+  const totalRecursos = recursosIniciales.filter((r) => r.status === 'active').length
+
   return (
     <header className="relative isolate overflow-hidden">
       <div
@@ -44,6 +49,9 @@ export function InicialHeader() {
             </h1>
           </div>
           <p className="text-lg font-semibold text-white/90 sm:text-xl">Educación Inicial</p>
+          <p className="text-sm text-white/75">
+            {totalRecursos} recursos en {categorias.length} categorías
+          </p>
         </div>
       </div>
     </header>
