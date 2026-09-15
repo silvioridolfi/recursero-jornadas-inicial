@@ -10,7 +10,7 @@ export function SiteFooter({ wide = false }: { wide?: boolean }) {
         className={`mx-auto flex flex-col items-center gap-1 px-4 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}
       >
         <img
-          src="/images/logo-dte-header.svg"
+          src="/images/logo-dte-footer.png"
           alt="Dirección de Tecnología Educativa | Gobierno de la Provincia de Buenos Aires"
           className="h-auto w-full max-w-[504px] object-contain sm:max-w-[672px]"
         />
