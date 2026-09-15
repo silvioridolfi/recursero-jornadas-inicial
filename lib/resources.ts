@@ -2,14 +2,13 @@ import type { ComponentType, SVGProps } from 'react'
 import {
   TabletIcon,
   FolderIcon,
-  GlobeIcon,
   DocumentIcon,
   MonitorIcon,
 } from '@/components/resource-icons'
 
 export type AccentColor = 'magenta' | 'cian' | 'azul'
 
-export type ResourceCategory = 'Apps y software' | 'Documentos y guías' | 'Sitios recomendados'
+export type ResourceCategory = 'Apps y software' | 'Documentos y guías'
 
 export type Resource = {
   tag: string
@@ -57,6 +56,14 @@ export const resources: Resource[] = [
     category: 'Documentos y guías',
   },
   {
+    tag: 'Carpeta',
+    title: 'Recursos Educar',
+    href: 'https://drive.google.com/drive/folders/1QeNXRm1sdztfN9XJhTJTc2MLtDoe_Q4R?usp=drive_link',
+    accent: 'cian',
+    icon: FolderIcon,
+    category: 'Documentos y guías',
+  },
+  {
     tag: 'Documento',
     title: 'Marco General de Lineamientos Pedagógicos',
     href: 'https://drive.google.com/drive/folders/1BtSPcB9nPF50Uc6Y-eNG1IPpr7rAGqFk?usp=drive_link',
@@ -64,18 +71,6 @@ export const resources: Resource[] = [
     icon: DocumentIcon,
     category: 'Documentos y guías',
   },
-  {
-    tag: 'Sitio',
-    title: 'Educ.ar',
-    href: 'https://drive.google.com/drive/folders/1QeNXRm1sdztfN9XJhTJTc2MLtDoe_Q4R?usp=drive_link',
-    accent: 'azul',
-    icon: GlobeIcon,
-    category: 'Sitios recomendados',
-  },
 ]
 
-export const resourceCategories: ResourceCategory[] = [
-  'Apps y software',
-  'Documentos y guías',
-  'Sitios recomendados',
-]
+export const resourceCategories: ResourceCategory[] = ['Apps y software', 'Documentos y guías']
