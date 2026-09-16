@@ -13,10 +13,26 @@ import {
   recursosIniciales,
 } from '@/lib/inicial/resources'
 
+const inicialTitle = 'Recursero Digital · Educación Inicial | DTE Región 1'
+const inicialDescription =
+  'Un recursero permanente de consulta para docentes y jardines de Nivel Inicial de la Provincia de Buenos Aires: sitios, aplicaciones, materiales y propuestas de enseñanza. Dirección de Tecnología Educativa, Región 1.'
+
 export const metadata: Metadata = {
-  title: 'Recursero Digital · Educación Inicial | DTE Región 1',
-  description:
-    'Una selección de sitios, aplicaciones, materiales y propuestas para acompañar la enseñanza en el Nivel Inicial. Dirección de Tecnología Educativa, Región 1.',
+  title: inicialTitle,
+  description: inicialDescription,
+  openGraph: {
+    title: inicialTitle,
+    description: inicialDescription,
+    url: '/inicial',
+    siteName: 'Recursero Digital DTE',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: inicialTitle,
+    description: inicialDescription,
+  },
 }
 
 export default function InicialPage() {

@@ -18,9 +18,23 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params
   const categoria = getCategoria(slug)
   if (!categoria) return {}
+  const title = `${categoria.nombre} | Recursero Digital · Educación Inicial`
   return {
-    title: `${categoria.nombre} | Recursero Digital · Educación Inicial`,
+    title,
     description: categoria.descripcion,
+    openGraph: {
+      title,
+      description: categoria.descripcion,
+      url: `/inicial/categoria/${categoria.slug}`,
+      siteName: 'Recursero Digital DTE',
+      locale: 'es_AR',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: categoria.descripcion,
+    },
   }
 }
 
