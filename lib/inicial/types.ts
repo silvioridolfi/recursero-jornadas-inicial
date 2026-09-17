@@ -98,6 +98,7 @@ export type Conectividad =
   | 'Funciona sin internet'
   | 'Tiene modalidad offline'
   | 'Parcialmente offline'
+  | 'No verificado'
 
 export type RequisitoCuenta =
   | 'No requiere cuenta'
